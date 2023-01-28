@@ -1,3 +1,15 @@
+use std::borrow::Cow;
+
 fn main() {
-    println!("Hello, world!");
+    let x = 1;
+    let b = Cow::Borrowed(&x);
+    let y = b;
+    match y {
+        Cow::Borrowed(_) => println!("Borrowed"),
+        Cow::Owned(_) => println!("Owned"),
+    }
+    match y {
+        Cow::Borrowed(_) => println!("Borrowed"),
+        Cow::Owned(_) => println!("Owned"),
+    }
 }
