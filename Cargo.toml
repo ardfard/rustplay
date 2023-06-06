@@ -3,6 +3,10 @@ name = "rustplay"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "list-pg-db"
+path = "src/bin/list-pg-db.rs"
 
 [dependencies]
+postgres = "0.19.5"
+clap = { version = "4.3.2", features = ["derive"]}
