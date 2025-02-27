@@ -2,14 +2,14 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::rc::Rc;
-use std::borrow::ToOwned;
 
+type NodeRef<V> = Rc<RefCell<Node<V>>>;
 
 #[derive(Clone)]
 struct Node<V> {
     value: V, 
-    previous: Option<Rc<RefCell<Node<V>>>>,
-    next: Option<Rc<RefCell<Node<V>>>>,
+    previous: Option<NodeRef<V>>,
+    next: Option<NodeRef<V>>,
 }
 
 impl<V> Node<V> {
@@ -32,8 +32,8 @@ impl<V> Node<V> {
 }
 
 struct DoubleLinkedList<V> {
-    head: Option<Rc<RefCell<Node<V>>>>,
-    tail: Option<Rc<RefCell<Node<V>>>>
+    head: Option<NodeRef<V>>,
+    tail: Option<NodeRef<V>>
 }
 
 impl<V> DoubleLinkedList<V> {
@@ -41,7 +41,7 @@ impl<V> DoubleLinkedList<V> {
         DoubleLinkedList { head: None, tail: None }
     }
 
-    fn add(&mut self, val: V) -> Rc<RefCell<Node<V>>> {
+    fn add(&mut self, val: V) -> NodeRef<V> {
         let node = Rc::new(RefCell::new(Node::new(val)));
         
         match &self.head {
@@ -58,7 +58,7 @@ impl<V> DoubleLinkedList<V> {
         node
     }
 
-    fn remove(&mut self, node: Rc<RefCell<Node<V>>>) {
+    fn remove(&mut self, node: NodeRef<V>) {
         if let Some(head) = &self.head {
             if Rc::ptr_eq(head, &node) {
                 self.head = node.borrow().next.clone();
@@ -88,7 +88,7 @@ impl<V> DoubleLinkedList<V> {
 
 struct LRUCache<K: Eq + Hash, V: Clone> {
     capacity: usize,
-    cache: HashMap<K, (V, Rc<RefCell<Node<K>>>)>,
+    cache: HashMap<K, (V, NodeRef<K>)>,
     order: DoubleLinkedList<K>
 }
 
