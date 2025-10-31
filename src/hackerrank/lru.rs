@@ -2,7 +2,6 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::rc::Rc;
-use std::borrow::ToOwned;
 
 
 #[derive(Clone)]
@@ -88,7 +87,7 @@ impl<V> DoubleLinkedList<V> {
 
 struct LRUCache<K: Eq + Hash, V: Clone> {
     capacity: usize,
-    cache: HashMap<K, (V, Rc<RefCell<Node<K>>>)>,
+    cache: HashMap<K, (V, Rc<RefCell<Node<K>>>)>, 
     order: DoubleLinkedList<K>
 }
 
@@ -159,5 +158,12 @@ mod tests {
         assert_eq!(cache.get(&"two".to_string()), None);
         assert_eq!(cache.get(&"three".to_string()), Some(3));
         assert_eq!(cache.get(&"four".to_string()), Some(4));
+    }
+
+    #[test]
+    fn test_main(){
+        let x = vec![1,2,3,4,5];
+        let y = x.iter().map(|x| x*x).filter(|x| x%2 == 0).fold(0, |x,y| x+y);
+        println!("{}", y);
     }
 }

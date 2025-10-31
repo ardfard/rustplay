@@ -1,15 +1,25 @@
 mod graph;
-mod smart_ptr;
 mod hackerrank;
+mod scratch;
+mod smart_ptr;
 
+fn minmaxsum(arr: &[i32]) -> (i32, i32) {
+    let mut arr = arr.to_vec();
+    arr.sort();
+    let min = arr[0];
+    let max = arr[arr.len() - 1];
+    (min, max)
+}
 // Add test
 #[cfg(test)]
 mod tests {
     use std::{
-        fs::File, io::{self, Read}, ops::Deref, path::{Display, Path}
+        fs::File,
+        io::{self, Read},
+        ops::Deref,
+        path::{Display, Path},
     };
 
-    // This is an example of using AsRef. Note AsRef<T> means that the type can
     // be converted to a reference of type T.
     #[test]
     fn as_ref_test() {
@@ -209,7 +219,7 @@ mod tests {
     fn testing() {
         let b = B;
         let c = Box::new("testing");
-        let y : [char; 8] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        let y: [char; 8] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         <_ as Ngedisplay<i32>>::ngedisplay(&b);
     }
 
@@ -239,11 +249,9 @@ mod tests {
             E: Error;
     }
 
-
     #[test]
-    fn test(){
+    fn test() {
         println!("{}", 5 & 7);
-        
     }
 
     pub fn min_end(n: i32, y: i32) -> i64 {
@@ -257,13 +265,12 @@ mod tests {
                 res = res + (2 << i);
                 m = m - 1;
             }
-            
         }
         res as i64
     }
 
-    fn int_to_bin(n : i32) -> [i8;32] {
-        let mut res : [i8; 32] = [0; 32];
+    fn int_to_bin(n: i32) -> [i8; 32] {
+        let mut res: [i8; 32] = [0; 32];
         let mut i = 31;
         let mut y = n;
         while y > 0 {
