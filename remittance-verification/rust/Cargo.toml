@@ -1,0 +1,13 @@
+[package]
+name = "remittance"
+version = "0.1.0"
+edition = "2021"
+description = "A tiny remittance ledger written to be verified in Lean with Aeneas"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+# An empty `[workspace]` table makes this crate its own workspace, so that it is
+# not mistaken for a member of the `rustplay` package one directory up.
+[workspace]
