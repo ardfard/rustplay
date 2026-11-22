@@ -19,11 +19,17 @@ impl<Unit> Add for Length<Unit> {
     }
 }
 
+impl<Unit> Length<Unit> {
+    fn new(val: f64) -> Length<Unit> {
+        Length(val, PhantomData)
+    }
+}
+
 fn main() {
     let x = Length::<Inch>(64.0,PhantomData).add(Length::<Inch>(72.0, PhantomData));
     // Add code that add unit
-    let y = Length::<Mm>(65.0, PhantomData);
-    let z = y.add(Length::<Mm>(32.0, PhantomData));
+    let y = Length::<Mm>::new(65.0);
+    let z = y.add(Length::<Mm>::new(32.0));
     println!("tst {}", x.0 );
     println!("{}", z.0);
     println!("Hello, world!");

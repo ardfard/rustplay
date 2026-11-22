@@ -160,4 +160,11 @@ mod tests {
         assert_eq!(cache.get(&"three".to_string()), Some(3));
         assert_eq!(cache.get(&"four".to_string()), Some(4));
     }
+
+    #[test]
+    fn test_main(){
+        let x = vec![1,2,3,4,5];
+        let y = x.iter().map(|x| x*x).filter(|x| x%2 == 0).fold(0, |x,y| x+y);
+        println!("{}", y);
+    }
 }
